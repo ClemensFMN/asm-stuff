@@ -1,6 +1,6 @@
 name: Assembler Blog
 markdown: redcarpet
-pygments: true
+highlighter: pygments
 url: http://clemensfmn.github.io/asm-stuff/
 paginate: 8
 description:     Blog for my Assembler Experiments
