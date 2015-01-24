@@ -6,7 +6,9 @@ Created on Fri Jan 23 13:54:37 2015
 """
 
 #hexdata = "40900000" # -> 4.5
-hexdata = "3fbae148" # -> 1.46
+# hexdata = "3fbae148" # -> 1.46
+hexdata = "4095b22d" # -> 4.678
+
 
 num_of_bits = 32
 

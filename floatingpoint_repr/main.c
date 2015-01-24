@@ -9,6 +9,7 @@ float func1(float x) {
 	return 2*x;
 }
 
+float ftest = 4.678;
 
 void main() {
 
