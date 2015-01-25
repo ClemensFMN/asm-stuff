@@ -10,6 +10,8 @@ float func1(float x) {
 }
 
 float ftest = 4.678;
+double dtest = 4.678;
+
 
 void main() {
 
