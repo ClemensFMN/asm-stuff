@@ -100,19 +100,19 @@ obtain 4.678. Seems as if the approximation were better in this case...
 
 ### General Notes ###
 
-There are infinitely many real numbers, but there are only a limited number of
+* There are infinitely many real numbers, but there are only a limited number of
 floating point numbers (depending on the number of bits used ) -> In most
 cases, a real number can not be exactely represented with a floating point
 number.
 
-The MSB of the floating point value is the sign bit: positive floating point
+* The MSB of the floating point value is the sign bit: positive floating point
 numbers start with 0...7; negative values start with 8...F.
 
-The fraction can be the all-zero-word; this corresponds to a significand of
+* The fraction can be the all-zero-word; this corresponds to a significand of
 $1$ and corresponds to the minimum significand value. When the fraction is the
 all-one-word, this corresponds to a maximum significand value of "almost" $2$.
 
-In case of the float datatype: Exponent values of 0x00 and 0xFF represent
+* In case of the float datatype: Exponent values of 0x00 and 0xFF represent
 special numbers (zero, infinity...); the minimum exponent is therefore 0x01,
 corresponding to a value of $2^{1-127} = 2^{-126}$; the maximum exponent is
 0xFE, corresponding to $2^{127}$. Therefore the minimum float value is
