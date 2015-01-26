@@ -6,15 +6,15 @@ comments: true
 categories:
 ---
 
-# Under Construction #
-
 In a computer a real number is (approximately) represented by a *floating
 point number*. This representation consists of a sign, a significand, and an
 exponent. The value of the floating point number \\( f \\) is then defined as
 
 $$
-f = (-1)^{sign} \times significand \times 2^{exponent}
+f = (-1)^{sign} \times significand \times 2^{exponent} = (-1)^{sign} \times (1.b_N b_{N-1} ... b_0)_2 \times 2^{exponent}
 $$
+
+The quantity $(0.b_N b_{N-1} ... b_0)_2$ is called fraction. 
 
 Depending on how many bits are used for significand and exponent, different
 types of floating point number representations exist; we will consider floats
@@ -105,4 +105,17 @@ floating point numbers (depending on the number of bits used ) -> In most
 cases, a real number can not be exactely represented with a floating point
 number.
 
-The significand can be 
+The MSB of the floating point value is the sign bit: positive floating point
+numbers start with 0...7; negative values start with 8...F.
+
+The fraction can be the all-zero-word; this corresponds to a significand of
+$1$ and corresponds to the minimum significand value. When the fraction is the
+all-one-word, this corresponds to a maximum significand value of "almost" $2$.
+
+In case of the float datatype: Exponent values of 0x00 and 0xFF represent
+special numbers (zero, infinity...); the minimum exponent is therefore 0x01,
+corresponding to a value of $2^{1-127} = 2^{-126}$; the maximum exponent is
+0xFE, corresponding to $2^{127}$. Therefore the minimum float value is
+$-2^{-126}$, and the maximum float value is "almost" $2 \times 2^{127} =
+2^{128}$.
+
