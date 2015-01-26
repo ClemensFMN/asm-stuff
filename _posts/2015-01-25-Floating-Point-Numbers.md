@@ -109,7 +109,7 @@ number.
 numbers start with 0...7; negative values start with 8...F.
 
 * The fraction can be the all-zero-word; this corresponds to a significand of
-$1$ and corresponds to the minimum significand value. When the fraction is the
+1 and corresponds to the minimum significand value. When the fraction is the
 all-one-word, this corresponds to a maximum significand value of "almost" 2.
 
 * In case of the float datatype: Exponent values of 0x00 and 0xFF represent
