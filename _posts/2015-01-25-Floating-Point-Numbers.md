@@ -16,14 +16,16 @@ $$
 f = (-1)^{sign} \times significand \times 2^{exponent}
 $$
 
-Different types of floating point number representations exist; we will
-consider floats and doubles.
+Depending on how many bits are used for significand and exponent, different
+types of floating point number representations exist; we will consider floats
+and doubles.
 
 ### C Datatype float ###
 
 This datatype has a total of 32 Bits; the first bit (MSB) is used for the
 sign, the next 8 bits are used for the exponent and the last 23 bits are used
-for the significand; see [Wikipedia](http://en.wikipedia.org/wiki/Single-precision_floating-point_format).
+for the fraction. From the fraction the significand can be calculated; see 
+[Wikipedia](http://en.wikipedia.org/wiki/Single-precision_floating-point_format).
 
 For testing I use the 
 [following program](<https://github.com/ClemensFMN/asm-stuff/tree/master/floatingpoint_repr/main.c>) and compile it with
@@ -55,9 +57,10 @@ I have written a small
 [python utility program](https://github.com/ClemensFMN/asm-stuff/blob/master/floatingpoint_repr/util.py)
 which helps in decoding the output.
 
-The binary representation of the hex value is 
+The binary representation of the hex value is (spaces are included to improve
+readability)
 
-> 0  10000001  00101011011001000101101
+> 0      10000001      00101011011001000101101
 
 From this we can see that the sign bit is 0; therefore the number has a
 positive sign: (-1)^0 = 1. The exponent is 10000001 which translates to 129.
@@ -76,7 +79,7 @@ of 4.678.
 
 The principle is pretty much the same, except that a double uses more bits: in total
 a double variable occupies 64 bits, with 1 bit for sign, 11 bits for the
-exponent, and (the remaining) 52 bits for the significand ; see
+exponent, and (the remaining) 52 bits for the fraction ; see
 [Wikipedia](http://en.wikipedia.org/wiki/Double-precision_floating-point_format).
 
 We can use the same trick as above to obtain the hex representation of dtest;
@@ -92,3 +95,14 @@ These are two 32 bit hex values; however, we need to "convert" them into one
 64 bit variable. Simple concatenation does the trick and we arrive at the (64
 bit) hex value 0xa1cac0834012b645. Throwing this into the python script, we
 obtain 4.678. Seems as if the approximation were better in this case...
+
+
+
+### General Notes ###
+
+There are infinitely many real numbers, but there are only a limited number of
+floating point numbers (depending on the number of bits used ) -> In most
+cases, a real number can not be exactely represented with a floating point
+number.
+
+The significand can be 
