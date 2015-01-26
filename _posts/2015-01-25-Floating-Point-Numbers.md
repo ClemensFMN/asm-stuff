@@ -11,14 +11,14 @@ point number*. This representation consists of a sign, a significand, and an
 exponent. The value of the floating point number \\( f \\) is then defined as
 
 $$
-f = (-1)^{sign} \times significand \times 2^{exponent} = (-1)^{sign} \times (1.b_N b_{N-1} ... b_0)_2 \times 2^{exponent}
+f = (-1)^{sign} \times significand \times 2^{exponent}
 $$
 
-The quantity \\( (0. b_N b_{N-1} ... b_0)_2 \\) is called fraction. 
+The significand is of the form \\( 1 + x \\) where x is represented as a
+binary number called fraction. Depending on how many bits are used for
+fraction and exponent, different types of floating point number
+representations exist; we will consider floats and doubles.
 
-Depending on how many bits are used for significand and exponent, different
-types of floating point number representations exist; we will consider floats
-and doubles.
 
 ### C Datatype float ###
 
