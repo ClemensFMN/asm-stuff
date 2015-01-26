@@ -14,7 +14,7 @@ $$
 f = (-1)^{sign} \times significand \times 2^{exponent} = (-1)^{sign} \times (1.b_N b_{N-1} ... b_0)_2 \times 2^{exponent}
 $$
 
-The quantity $(0.b_N b_{N-1} ... b_0)_2$ is called fraction. 
+The quantity \\( (0.b_N b_{N-1} ... b_0)_2 \\) is called fraction. 
 
 Depending on how many bits are used for significand and exponent, different
 types of floating point number representations exist; we will consider floats
