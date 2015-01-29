@@ -6,9 +6,6 @@ comments: true
 categories:
 ---
 
-# WORK IN PROGRESS #
-
-
 This post deals with the question of how a C program calls functions (mostly
 assembler functions).
 
