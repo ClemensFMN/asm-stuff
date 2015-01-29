@@ -1,33 +1,22 @@
-global  maxofthree
 global sumoftwo_asm
 global sumofints_asm
 section .text
 
 
-
-maxofthree:
-        mov     rax, rdi                ; result (rax) initially holds x
-        cmp     rax, rsi                ; is x less than y?
-        cmovl   rax, rsi                ; if so, set result to y
-        cmp     rax, rdx                ; is max(x,y) less than z?
-        cmovl   rax, rdx                ; if so, set result to z
-        ret                             ; the max will be in rax
-
-
 sumoftwo_asm:
-	mov rax, rdi
-	mov rbx, rsi
-	add rax, rbx
+	mov rax, rdi   ; move first operand to ax
+	mov rbx, rsi   ; second to bx
+	add rax, rbx   ; add and store result in ax
 	ret
 
-sumofints_asm:
-        xor rax, rax
-        cmp rsi, 0
-        je done
+sumofints_asm:          ; di holds a pointer to the first array element
+        xor rax, rax    ; zero ax (which we will use as accumulator)
+        cmp rsi, 0      ; si holds the number of element to sum over; 
+        je done         ; if the number of elements is zero, we are already finished
 next:
-        add rax, [rdi]
-        add rdi, 8
-        dec rsi
-        jnz next
+        add rax, [rdi]  ; add array element
+        add rdi, 8      ; increment pointer (64 bit ints -> 8 byte)
+        dec rsi         ; decrease the "counter"
+        jnz next        ; continue summing, if not zero
 done:
         ret
