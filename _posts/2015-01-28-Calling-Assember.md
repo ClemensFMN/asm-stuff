@@ -6,7 +6,7 @@ comments: true
 categories:
 ---
 
-= WORK IN PROGRESS =
+# WORK IN PROGRESS #
 
 
 This post deals with the question of how a C program calls functions (mostly
@@ -20,19 +20,21 @@ are different.
 Furthermore we use the nasm assembler - mostly because I find the syntax to be
 simpler and closer to the Intel documentation.
 
-=== Calling an Assembler Function from C ===
+### Calling an Assembler Function from C ###
 
 I have created a small [example project](https://github.com/ClemensFMN/asm-stuff/tree/master/int_exchange) 
-which consists of a small C program whcih
-invokes an assembler routine in a separate file.
+which consists of a small C program which
+invokes some assembler routines from func.asm.
 
-Nothing fancy, there are two functions taking two 64 bit integer parameters
-and returning one (their sum). Function sumoftwo_c is a normal C function;
-sumoftwo_asm is a "hand-written" assembler function.
+#### Passing Integer Parameters ####
+
+There are two functions taking two 64 bit integer parameters and returning one
+(their sum): sumoftwo_c is a normal C function; sumoftwo_asm is a "hand-
+written" assembler function.
 
 > make all
 
-compiles the thing and generates a list file. Somewhere around line #310 (at
+compiles the thing and generates a list file. Somewhere around line #340 (at
 least in my case), the main function starts. After some garbage (ok, not
 really - stack pointer setup etc), the interesting part starts:
 
@@ -53,9 +55,8 @@ after some stack setup, the file contains:
 	mov    rax,QWORD PTR [rbp-0x10]
 	add    rax,rdx
 
-The compiler flags used turn optimization off completely; nevertheless the
-code seems to be really awkward. Anyway, registers RDI and RSI are added and
-the result is stored in EAX.
+The code seems to be really awkward and complicated; nevertheless, the two
+registers EDI and ESI are added and the result is stored in EAX.
 
 After some stack cleanup, the function returns with the result being in EAX.
 
@@ -81,4 +82,51 @@ Therefore the function becomes really simple
 
 Move the parameters into EAX and EBX, respectively, sum them up so that the
 result is stored in EAX and return - that's it!.
+
+
+#### Passing an Array of Integers ####
+
+The function sumofints_c and sumofints_asm take an array of (64 bit) integers
+and a length parameter, respectively. Both functions calculate the sum of the
+array (its length defined by the second parameter) and return the sum.
+
+The disassembled c function is really a mess; we will concentrate on the
+assember function sumofints_asm right away.
+
+We can debug it via 
+
+> gdb main
+
+> b sumofints_asm
+
+> r
+
+Upon reaching the breakpoint we can inspect the registers
+
+> p $rsi
+
+yields 5, the number of integers to add. Getting the array to add is a bit
+more complicated; we want to see the memory region EDI points to (`x`), we
+want to display the data as "giants" (64 bit integers), and we want to see 5
+of them:
+
+> x/5g $rdi
+
+does the trick and yields
+
+> 0x601060 <list_data>:   1       2
+
+> 0x601070 <list_data+16>:        3       4
+
+> 0x601080 <list_data+32>:        5
+
+Clearly the array we want to sum over. Looking into the lst file at address
+0x601060 shows also the data.
+
+With `n` we can step through the assembler program and see that EAX has a
+value of 15 at the very end of the function:
+
+> p $eax
+
+yields 15.
 
