@@ -1,5 +1,6 @@
 global  maxofthree
 global sumoftwo_asm
+global sumofints_asm
 section .text
 
 
@@ -18,3 +19,15 @@ sumoftwo_asm:
 	mov rbx, rsi
 	add rax, rbx
 	ret
+
+sumofints_asm:
+        xor rax, rax
+        cmp rsi, 0
+        je done
+next:
+        add rax, [rdi]
+        add rdi, 8
+        dec rsi
+        jnz next
+done:
+        ret
