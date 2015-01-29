@@ -20,16 +20,14 @@ are different.
 Furthermore we use the nasm assembler - mostly because I find the syntax to be
 simpler and closer to the Intel documentation.
 
-### Calling an Assembler Function from C ###
-
 I have created a small [example project](https://github.com/ClemensFMN/asm-stuff/tree/master/int_exchange) 
 which consists of a small C program which
 invokes some assembler routines from func.asm.
 
-#### Passing Integer Parameters ####
+### Passing Integer Parameters ###
 
 There are two functions taking two 64 bit integer parameters and returning one
-(their sum): sumoftwo_c is a normal C function; sumoftwo_asm is a "hand-
+(their sum): `sumoftwo_c` is a normal C function; `sumoftwo_asm` is a "hand-
 written" assembler function.
 
 > make all
@@ -46,7 +44,7 @@ really - stack pointer setup etc), the interesting part starts:
 The function parameters are assigned to the processor registers EDI and ESI,
 respectively, and then the function is called.
 
-The list file contains the definition of sumoftwo_c slightly above main; again
+The list file contains the definition of `sumoftwo_c` slightly above main; again
 after some stack setup, the file contains:
 
 	mov    QWORD PTR [rbp-0x8],rdi
@@ -68,8 +66,8 @@ and yes, the first registers used for integer parameter passing are EDI and
 ESI. Integers are returned in EAX - correct!
 
 
-Basically sumoftwo_asm does the same as the C function sumoftwo_c except for
-the stack handling. We know that sumoftwo_asm does not use any local
+Basically `sumoftwo_asm` does the same as the C function `sumoftwo_c` except
+for the stack handling. We know that `sumoftwo_asm` does not use any local
 variables, therefore there is no need to set up a stack pointer (at least I
 think so).
 
@@ -84,14 +82,15 @@ Move the parameters into EAX and EBX, respectively, sum them up so that the
 result is stored in EAX and return - that's it!.
 
 
-#### Passing an Array of Integers ####
+### Passing an Array of Integers ###
 
-The function sumofints_c and sumofints_asm take an array of (64 bit) integers
-and a length parameter, respectively. Both functions calculate the sum of the
-array (its length defined by the second parameter) and return the sum.
+The function `sumofints_c` and `sumofints_asm` take an array of (64 bit)
+integers and a length parameter, respectively. Both functions calculate the
+sum of the array (its length defined by the second parameter) and return the
+sum.
 
 The disassembled c function is really a mess; we will concentrate on the
-assember function sumofints_asm right away.
+assember function `sumofints_asm` right away.
 
 We can debug it via 
 
@@ -107,8 +106,8 @@ Upon reaching the breakpoint we can inspect the registers
 
 yields 5, the number of integers to add. Getting the array to add is a bit
 more complicated; we want to see the memory region EDI points to (`x`), we
-want to display the data as "giants" (64 bit integers), and we want to see 5
-of them:
+want to display the data as "giants" (64 bit integers) `g`, and we want to see
+5 of them:
 
 > x/5g $rdi
 
@@ -121,10 +120,10 @@ does the trick and yields
 > 0x601080 <list_data+32>:        5
 
 Clearly the array we want to sum over. Looking into the lst file at address
-0x601060 shows also the data.
+0x601060 also shows the data.
 
-With `n` we can step through the assembler program and see that EAX has a
-value of 15 at the very end of the function:
+With the key `n` we can step through the assembler program and see that EAX
+has a value of 15 at the very end of the function:
 
 > p $eax
 
