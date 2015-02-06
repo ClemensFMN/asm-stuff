@@ -13,7 +13,7 @@ and double).
 Furthermore we use the nasm assembler - mostly because I find the syntax to be
 simpler and closer to the Intel documentation.
 
-I have created some small example projects for passing [float parameters](https://github.com/ClemensFMN/asm-stuff/tree/master/float_exchange) and for passing [double parameters](https://github.com/ClemensFMN/asm-stuff/tree/master/int_exchange).
+I have created some small example projects for passing [float parameters](https://github.com/ClemensFMN/asm-stuff/tree/master/float_exchange) and for passing [double parameters](https://github.com/ClemensFMN/asm-stuff/tree/master/double_exchange).
 
 ### Passing Float Parameters ###
 
@@ -23,7 +23,7 @@ parameter and returns the array sum.
 
 According to the calling conventions, the floating point parameters are passed
 in the XMM registers; therefore `sumoftwo_asm` adds the two registers and
-returns the result in XMM0 (accordin to the calling convention) - That's about
+returns the result in XMM0 (according to the calling convention) - That's about
 it!
 
 The other function `running_sum_asm` receives the pointer to the float array
@@ -44,6 +44,7 @@ increases the pointer value
 
 > dec rsi
 
-If it is zero, we return from the function (the result is stored in XMM0).
+If ESI is zero, we have summed up all values, and the function returns (with
+the result being contained in XMM0).
 
 
