@@ -19,16 +19,14 @@ the sum in the first parameter, whereas `sum_float_asm` works on float arrays.
 
 In the assembler function, the `movdqa` instruction is used to move the memory
 values into the XMM0 and XMM1 register, respectively. The instruction seems to
-move 128 Bits regardless of the datatype so it used both assembler functions.
+move 128 Bits regardless of the datatype so it used in both assembler functions.
 
-Adding integers and floats is a different operation, therefore the
-corresponding instructions are different: `sum_int_asm` uses 
+Adding integers and floats is a different operation, therefore different
+instructions are needed: function `sum_int_asm` uses
 
 > paddb xmm0, xmm1
 
-whereas 
-
-`sum_float_asm` uses
+whereas function `sum_float_asm` uses
 
 > addps xmm0, xmm1
 
