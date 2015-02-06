@@ -33,7 +33,7 @@ the length equals zero - in this case, we can return from the function right
 away.
 Otherwise, a loop adds the array values from memory 
 
-> addsd xmm0, [rdi]
+> addss xmm0, [rdi]
 
 increases the pointer value
 
@@ -47,4 +47,8 @@ increases the pointer value
 If ESI is zero, we have summed up all values, and the function returns (with
 the result being contained in XMM0).
 
+### Passing Double Parameters ###
+
+The programs work in a similar spirit; only difference is to instruct the CPU
+to use assembler instructions for doubles; i.e. we use `addsd` instruction.
 
