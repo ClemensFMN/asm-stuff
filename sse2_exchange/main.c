@@ -20,11 +20,11 @@ void main() {
   // b sum_int_asm
   // x/16ub $rdi
   // x/16ub $rsi
-  uint8_t xi[] = {1, 22, 55, 250};
-  uint8_t yi[] = {4, 26, 18, 50};
+  uint8_t xi[] = {1, 22, 55, 250, 34, 12, 67, 26};
+  uint8_t yi[] = {4, 26, 18,  50, 47, 90, 12, 27};
   sum_int_asm(xi, yi);
 
-  for(int i=0; i<4; i++) {
+  for(int i=0; i<8; i++) {
     printf("%i \n", xi[i]);
   }
 
