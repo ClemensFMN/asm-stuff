@@ -14,9 +14,9 @@ There is a small [example program](https://github.com/ClemensFMN/asm-stuff/tree/
 showing the main idea.
 
 There are three functions: `sum_int_asm`, `sum_int_asm_2`, and
-`sum_float_asm`. The integer functions take two arrays of integers, add
-them element-wise and return the sum in the first parameter, whereas
-`sum_float_asm` works on float arrays.
+`sum_float_asm`. The integer functions take two arrays of integers (with
+different bit-widths), add them element-wise and return the sum in the first
+parameter, whereas `sum_float_asm` works on float arrays.
 
 In the assembler function, the `movdqa` instruction is used to move the memory
 values into the XMM0 and XMM1 register, respectively. The instruction seems to
@@ -27,13 +27,14 @@ therefore "match" the datatype. In case of `sum_int_asm` the instruction
 
 > paddb xmm0, xmm1
 
-is used; in case of `sum_int_asm_2` (working on 16 Bit integers)
+is used for adding the 8 Bit values; in case of `sum_int_asm_2` 
 
 > paddw xmm0, xmm1
 
-is used, and in case of `sum_float_asm` the instruction
+is used for adding the 16 Bit values, and in case of `sum_float_asm` the
+instruction
 
 > addps xmm0, xmm1
 
-is used. Moving the result from XMM0 into memory is again done via the
-`movdqa` instruction for both integer and floats.
+for float addition is used. Moving the result from XMM0 into memory is again
+done via the `movdqa` instruction for both integer and floats.
