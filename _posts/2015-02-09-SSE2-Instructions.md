@@ -13,23 +13,27 @@ variables within **one** instruction.
 There is a small [example program](https://github.com/ClemensFMN/asm-stuff/tree/master/sse2_exchange) 
 showing the main idea.
 
-There are two functions: `sum_int_asm` and `sum_float_asm`. The function
-`sum_int_asm` takes two arrays of integers, adds them element-wise and returns
-the sum in the first parameter, whereas `sum_float_asm` works on float arrays.
+There are three functions: `sum_int_asm`, `sum_int_asm_2`, and
+`sum_float_asm`. The integer functions take two arrays of integers, add
+them element-wise and return the sum in the first parameter, whereas
+`sum_float_asm` works on float arrays.
 
 In the assembler function, the `movdqa` instruction is used to move the memory
 values into the XMM0 and XMM1 register, respectively. The instruction seems to
 move 128 Bits regardless of the datatype so it used in both assembler functions.
 
-Adding integers and floats is a different operation, therefore different
-instructions are needed: function `sum_int_asm` uses
+The arithmetic functions, however, need to consider the data type and must
+therefore "match" the datatype. In case of `sum_int_asm` the instruction
 
 > paddb xmm0, xmm1
 
-whereas function `sum_float_asm` uses
+is used; in case of `sum_int_asm_2` (working on 16 Bit integers)
+
+> paddw xmm0, xmm1
+
+is used, and in case of `sum_float_asm` the instruction
 
 > addps xmm0, xmm1
 
-Moving the result from XMM0 into memory is again done via the `movdqa`
-instruction for both integer and floats.
-
+is used. Moving the result from XMM0 into memory is again done via the
+`movdqa` instruction for both integer and floats.
