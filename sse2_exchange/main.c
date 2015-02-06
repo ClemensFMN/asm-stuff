@@ -5,6 +5,7 @@
 
 void sum_float_asm(float[], float[]);
 void sum_int_asm(uint8_t[], uint8_t[]);
+void sum_int_asm_2(uint16_t[], uint16_t[]);
 
 void main() {
 
@@ -26,6 +27,15 @@ void main() {
 
   for(int i=0; i<8; i++) {
     printf("%i \n", xi[i]);
+  }
+
+
+  uint16_t xj[] = {1, 22, 55, 250};
+  uint16_t yj[] = {4, 26, 18,  50};
+  sum_int_asm_2(xj, yj);
+
+  for(int i=0; i<4; i++) {
+    printf("%i \n", xj[i]);
   }
 
 
