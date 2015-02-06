@@ -50,5 +50,6 @@ the result being contained in XMM0).
 ### Passing Double Parameters ###
 
 The programs work in a similar spirit; only difference is to instruct the CPU
-to use assembler instructions for doubles; i.e. we use `addsd` instruction.
+to use assembler instructions for doubles; i.e. we use the `addsd` instruction
+for adding instead of `addss` (and `xorsd` instead of `xorss`).
 
