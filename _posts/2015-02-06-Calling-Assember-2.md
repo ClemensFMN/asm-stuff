@@ -73,15 +73,15 @@ To check the correct array access (i.e. increasing DI by 4 in every iteration), 
 
 > x/x $rdi
 
-0x7fffffffe4e0: 0x3f8ccccd
+> 0x7fffffffe4e0: 0x3f8ccccd
 
 > x/x $rdi+1
 
-0x7fffffffe4e1: 0xcd3f8ccc
+> 0x7fffffffe4e1: 0xcd3f8ccc
 
 > x/x $rdi+4
 
-0x7fffffffe4e4: 0x400ccccd
+> 0x7fffffffe4e4: 0x400ccccd
 
 
 ### Passing Double Parameters ###
