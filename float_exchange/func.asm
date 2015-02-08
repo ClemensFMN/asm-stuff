@@ -15,7 +15,7 @@ running_sum_asm:
         je      done
 next:
         addss   xmm0, [rdi]             ; add in the current array element
-        add     rdi, 8                  ; move to next array element
+        add     rdi, 4                  ; move to next array element
         dec     rsi                     ; count down
         jnz     next                    ; if not done counting, continue
 done:
