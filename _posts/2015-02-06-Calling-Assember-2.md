@@ -37,19 +37,59 @@ Otherwise, a loop adds the array values from memory
 
 increases the pointer value
 
-> add rdi, 8
+> add rdi, 4
 
-(one float value requires 8 Bytes -> therefore the pointer address is
-(increases in steps of 8), and decreases the length variable
+(one float value requires 4 Bytes 32 Bits) -> therefore the pointer address is
+(increases in steps of 4), and decreases the length variable
 
 > dec rsi
 
 If ESI is zero, we have summed up all values, and the function returns (with
 the result being contained in XMM0).
 
+We can check with the debugger:
+
+> gdb main
+
+> b running_sum_asm
+
+> r
+
+> p $rsi
+
+yields 2 (the number of values to add)
+
+> x/3f $rdi
+
+shows the values in memory (formatted as floats), whereas 
+
+> x/3x $rdi
+
+> 0x3f8ccccd      0x400ccccd      0x40b00000
+
+shows the array as hex values. Using [util.py](https://github.com/ClemensFMN/asm-stuff/blob/master/floatingpoint_repr/util.py) converts them into floats.
+
+To check the correct array access (i.e. increasing DI by 4 in every iteration), we can use
+
+> x/x $rdi
+
+0x7fffffffe4e0: 0x3f8ccccd
+
+> x/x $rdi+1
+
+0x7fffffffe4e1: 0xcd3f8ccc
+
+> x/x $rdi+4
+
+0x7fffffffe4e4: 0x400ccccd
+
+
 ### Passing Double Parameters ###
 
-The programs work in a similar spirit; only difference is to instruct the CPU
-to use assembler instructions for doubles; i.e. we use the `addsd` instruction
-for adding instead of `addss` (and `xorsd` instead of `xorss`).
+The programs work in a similar spirit; we need to instruct the CPU to use
+assembler instructions for doubles; i.e. we use the `addsd` instruction for
+adding instead of `addss` (and `xorsd` instead of `xorss`) and consider the 64
+Bit length of double numbers:
+
+> add rdi, 8
 
